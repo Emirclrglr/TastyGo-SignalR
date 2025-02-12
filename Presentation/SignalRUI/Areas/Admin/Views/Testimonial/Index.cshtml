@@ -1,0 +1,72 @@
+﻿@model IEnumerable<ResultTestimonialDto>
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+	int count = 0;
+}
+
+<div class="card">
+	<div class="card-header">
+		<div class="card-title">Referanslar</div>
+	</div>
+	<div class="card-body">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th class="text-center" style="width:50px" scope="col">&#9679;</th>
+					<th class="text-center" scope="col">Referans Görseli</th>
+					<th class="text-center" scope="col">Referans Adı</th>
+					<th class="text-center" scope="col">Referans Unvanı</th>
+					<th class="text-center" scope="col">Referans Yorumu</th>
+					<th class="text-center" scope="col">Durum</th>
+					<th class="text-center" scope="col">Düzenle</th>
+					<th class="text-center" scope="col">Sil</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					count++;
+					string statusClass = "";
+					string statusBody = "";
+					string statusHref = "";
+					string commentFormat = "";
+					if (item.Status == true)
+					{
+						statusClass = "badge badge-success";
+						statusBody = "Aktif";
+						statusHref = $"/Admin/Testimonial/SetTestimonialStatusPassive/{item.Id}";
+					}
+					else
+					{
+						statusClass = "badge badge-danger";
+						statusBody = "Pasif";
+						statusHref = $"/Admin/Testimonial/SetTestimonialStatusActive/{item.Id}";
+					}
+
+					if (item.Comment.Length >= 100){
+						commentFormat = $"{item.Comment.Substring(0, 100)}...";
+					}
+					else {
+						commentFormat = item.Comment;
+					}
+
+					<tr>
+						<td class="text-center">@count</td>
+						<td class="text-center"><img src="@item.ImageUrl" class="rounded-circle" width="100" height="100" /></td>
+						<td class="text-center">@item.TestimonialName</td>
+						<td class="text-center">@item.TestimonialTitle</td>
+						<td class="text-center">@commentFormat</td>
+						<td class="text-center"><a href="@statusHref" class="@statusClass">@statusBody</a></td>
+						<td class="text-center"><a href="/Admin/Testimonial/UpdateTestimonial/@item.Id" class="btn btn-outline-primary btn-rounded">Düzenle</a></td>
+						<td class="text-center"><a href="/Admin/Testimonial/DeleteTestimonial/@item.Id" class="btn btn-outline-danger btn-rounded">Sil</a></td>
+					</tr>
+				}
+			</tbody>
+		</table>
+		<a href="/Admin/Testimonial/CreateTestimonial/" class="btn btn-outline-info btn-rounded mb-3">Yeni Referans Oluştur</a>
+	</div>
+</div>
+
+
+

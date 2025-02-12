@@ -1,0 +1,42 @@
+﻿@model IEnumerable<ResultSocialMediaDto>
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+	int count = 0;
+}
+
+<div class="card">
+	<div class="card-header">
+		<div class="card-title">Sosyal Medya Hesapları</div>
+	</div>
+	<div class="card-body">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th class="text-center" style="width:50px" scope="col">&#9679;</th>
+					<th class="text-center" scope="col">İkon</th>
+					<th class="text-center" scope="col">Başlık</th>
+					<th class="text-center" scope="col">Düzenle</th>
+					<th class="text-center" scope="col">Sil</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					count++;
+
+					<tr>
+						<td class="text-center">@count</td>
+						<td class="text-center"><i class="@item.Icon la-4x"></i></td>
+						<td class="text-center">@item.Title</td>
+						<td class="text-center"><a href="/Admin/SocialMedia/UpdateSocialMedia/@item.Id" class="btn btn-outline-primary btn-rounded">Düzenle</a></td>
+						<td class="text-center"><a href="/Admin/SocialMedia/DeleteSocialMedia/@item.Id" class="btn btn-outline-danger btn-rounded">Sil</a></td>
+					</tr>
+				}
+			</tbody>
+		</table>
+		<a href="/Admin/SocialMedia/CreateSocialMedia/" class="btn btn-outline-info btn-rounded mb-3">Yeni Sosyal Medya Oluştur</a>
+	</div>
+</div>
+
+

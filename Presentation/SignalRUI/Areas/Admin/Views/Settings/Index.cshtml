@@ -1,0 +1,53 @@
+﻿@model EditUserDto
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header"><h5 class="text-center pt-3">Hesap Ayarları</h5></div>
+    <div class="card-body mb-5">
+        <form method="post">
+            <div class="container">
+                <div class="row justify-content-center mt-4">
+                    <div class="col-4">
+                        <label>Ad</label>
+                        <input type="text" class="form-control" asp-for="Firstname" required/>
+                    </div>
+                    <div class="col-4">
+                        <label>Soyad</label>
+                        <input type="text" class="form-control" asp-for="Lastname" required/>
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-4">
+                    <div class="col-4">
+                        <label>E-Posta</label>
+                        <input type="email" class="form-control" asp-for="Email" required/>
+                    </div>
+                    <div class="col-4">
+                        <label>Kullanıcı Adı</label>
+                        <input type="text" class="form-control" asp-for="Username" required/>
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-4">
+                    <div class="col-4">
+                        <label>Şifre</label>
+                        <input type="password" class="form-control" asp-for="Password" required/>
+                    </div>
+                    <div class="col-4">
+                        <label>Şifre Tekrar</label>
+                        <input type="password" class="form-control" asp-for="ConfirmPassword" required/>
+                        <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-8 mt-4">
+                        <button type="submit" class="btn btn-block btn-outline-primary rounded-pill px-5">Kaydet</button>
+                    </div>
+                </div>
+            </div>
+           
+        </form>
+    </div>
+</div>
+

@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "ClientUserCount";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+@await Component.InvokeAsync("_UINavbarViewPartial")
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script type="text/javascript">
+    $(document).ready(() => {
+        var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:44314/SignalRHub").build();
+
+        connection.start().then(() => {
+            
+        });
+
+        connection.on("ReceiveClientCount", (ClientCount) => {
+            $("#clientCount").text(ClientCount);
+        })
+    })    
+</script>
+<div class="container">
+    <div class="card m-5 p-5">
+        <div class="card-title text-center"><h2>Anlık Client Sayısı</h2></div>
+        <div class="card-body">
+            <h1 id="clientCount" class="text-center"></h1>
+        </div>
+    </div>
+</div>
+

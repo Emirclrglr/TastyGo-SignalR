@@ -1,0 +1,144 @@
+﻿@using System.Globalization
+@model IEnumerable<ResultBasketDto>
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_UILayout.cshtml";
+	int count = 0;
+	decimal totalPrice = 0;
+	decimal totalPriceWithTax = 0;
+	var cultureInfo = new CultureInfo("tr-TR");
+
+}
+
+<style>
+	.bg-template {
+		background: rgb(0,0,0);
+		background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 41%, rgba(38,38,38,1) 58%, rgba(82,74,74,1) 100%, rgba(0,212,255,1) 100%);
+	}
+
+	.btn-template {
+		background: linear-gradient(90deg, rgba(255,190,51,1) 0%, rgba(231,147,10,1) 100%);
+		background-size: 200% 100%;
+		background-position: 100% 0;
+		transition: background-position 0.7s ease;
+	}
+
+		.btn-template:hover {
+			background-position: 0 0;
+		}
+</style>
+
+@await Component.InvokeAsync("_UINavbarViewPartial")
+<nav class="breadcrumb m-0 bg-template" style="border-radius: 0;">
+	<div class="container">
+		<a class="breadcrumb-item text-white" href="/Home/Index/">Anasayfa</a>
+		<a class="breadcrumb-item text-white" href="/Menu/Index/">Menü</a>
+		<span class="breadcrumb-item active" style="color: #ffbe33;">Sepetiniz</span>
+	</div>
+</nav>
+
+<div class="container">
+	<div class="row">
+		<div class="col-9">
+			<div class="card mt-5 mb-5">
+				<div class="card-body">
+					<div class="card-header p-0 bg-white">
+						<div class="d-flex justify-content-center align-items-center mb-2 bg-template text-white">
+							<i class="las la-shopping-cart la-4x"></i>
+							<h1 class="card-title mb-0 ml-2">Sepetim</h1>
+						</div>
+					</div>
+					
+					@if (Model.Count() != 0)
+					{
+						<table class="table table-hover">
+							<thead class="text-white bg-template">
+								<tr>
+									<td class="text-center">#</td>
+									<td class="text-center">Ürün</td>
+									<td class="text-center">Adet</td>
+									<td class="text-center">Fiyat</td>
+									<td class="text-center">Toplam Fiyat</td>
+									<td class="text-center">Sil</td>
+								</tr>
+							</thead>
+
+
+							@foreach (var item in Model)
+							{
+								cultureInfo.NumberFormat.CurrencyPositivePattern = 3;
+								count++;
+
+								totalPrice += item.TotalPrice;
+								totalPriceWithTax = totalPrice * (decimal)1.2;
+								<tbody class="align-middle">
+									<tr>
+										<td class="align-middle text-center">@count</td>
+										<td class="align-middle text-center">@item.ProductName</td>
+										<td class="align-middle text-center">@item.ProductCount</td>
+										<td class="align-middle text-center">@item.ProductPrice.ToString("C2", cultureInfo)</td>
+										<td class="align-middle text-center">@item.TotalPrice.ToString("C2", cultureInfo)</td>
+										<td class="align-middle text-center"><a href="/Basket/DeleteBasketItem/@item.Id" class="btn btn-danger bg-gradient"><i class="lar la-trash-alt"></i></a></td>
+									</tr>
+								</tbody>
+							}
+						</table>
+					}
+					else
+					{
+						<div class="text-center">
+							<h5 class="mt-4">Sepetinizde Ürün Bulunmuyor</h5>
+						</div>
+					}
+				</div>
+			</div>
+
+		</div>
+		<div class="col-3">
+			<div class="card mt-5 bg-template">
+				<div class="card-body">
+					<div class="d-flex justify-content-center align-items-center mb-3">
+
+						<h2 class="card-title text-center text-white mb-0" style="font-size: 25px">% İndirim Kuponu</h2>
+					</div>
+					<form>
+						<div class="input-group">
+							<input type="text" id="couponCode" class="form-control border-0 pr-1" placeholder="Kupon kodunuz"/>
+							<div class="ml-1">
+								<a class="btn btn-warning  text-white" id="btnCouponCode" style="cursor: pointer;">Uygula</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="card mt-3 mb-5">
+				<div class="card-body">
+					<h2 class="card-title" style="font-size: 25px">Sepet Özeti</h2>
+					<hr />
+					<div class="d-flex justify-content-between">
+						<div>
+							<p>Tutar</p>
+							<p>Kdv Oranı</p>
+						</div>
+						<div class="text-right">
+							<p>@totalPrice.ToString("C2", cultureInfo)</p>
+							<p>20%</p>
+						</div>
+					</div>
+					<hr />
+					<div class="d-flex justify-content-between">
+						<div>
+							<p>Toplam Tutar</p>
+						</div>
+						<div class="text-right">
+							<p>@totalPriceWithTax.ToString("C2", cultureInfo)</p>
+						</div>
+					</div>
+					<button id="confirmTheBasket" class="btn rounded-pill mt-1 btn-block text-white btn-template">Sepeti Onayla</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

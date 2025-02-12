@@ -1,0 +1,81 @@
+﻿@model IEnumerable<ResultDiningTableDto>
+@{
+	ViewData["Title"] = "TableListByStatus";
+	Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+	string color;
+	string status;
+}
+
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script type="text/javascript">
+		$(document).ready(() => {
+		var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:44314/SignalRHub").build();
+
+		connection.start().then(() => {
+
+			setInterval(() => {
+				connection.invoke("SendDiningTableStatus");
+			}, 1000);
+
+
+		}).catch((err) => {
+			console.log(err);
+		})
+
+		connection.on("ReceiveDiningTableList", (values) => {
+			console.log(values);
+			let diningTableDiv = `<div class="row">`;
+			let color;
+			let status;
+			$("#tableList").empty();
+			$.each(values, (index, item) => {
+				if (item.status == true){
+					 color = "success";
+					 status = "Dolu"
+				}
+				else {
+					color = "danger";
+					 status = "Boşta"
+				}
+
+				diningTableDiv +=
+				`<div class="col-md-3">
+					<div class="card card-stats card-${color}">
+						<div class="card-body ">
+							<div class="row">
+								<div class="col-5">
+									<div class="icon-big text-center">
+										<i class="las la-utensils"></i>
+									</div>
+								</div>
+								<div class="col-7 d-flex align-items-center">
+									<div class="numbers">
+										<p class="card-category">${item.diningTableName}</p>
+										<h4 class="card-title text-center">${status}</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>`
+			});
+				diningTableDiv += `</div>`
+			$("#tableList").html(diningTableDiv);
+		});
+
+	});</script>
+
+<div class="card">
+	<div class="card-header">
+		<h1 class="card-title">Anlık Masa Durumları</h1>
+	</div>
+	<div id="tableList" class="card-body">
+			
+	</div>
+
+</div>
+
+

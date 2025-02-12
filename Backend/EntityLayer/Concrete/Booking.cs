@@ -1,0 +1,13 @@
+﻿namespace SignalR.EntityLayer.Concrete
+{
+    public class Booking
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
+        public int NumberOfPeople { get; set; }
+        public DateTime Date { get; set; }
+        public string ReservationStatus { get; set; }
+    }
+}

@@ -1,0 +1,35 @@
+﻿@model UpdateDiscountDto
+@{
+    ViewData["Title"] = "UpdateDiscount";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">İndirimler</div>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group pt-0">
+                <label asp-for="Title">Ürün</label>
+                @Html.DropDownListFor(x => x.Title, (List<SelectListItem>)ViewBag.ProductItems, new {@class = "form-control"})
+            </div>
+            <div class="form-group pt-0">
+                <label asp-for="DiscountRate">İndirim Oranı</label>
+                <input type="number" class="form-control" asp-for="DiscountRate" required placeholder="0%"/>
+            </div>
+            <div class="form-group pt-0">
+                <label asp-for="ImageUrl">Görsel</label>
+                @Html.DropDownListFor(x => x.ImageUrl, (List<SelectListItem>)ViewBag.ProductImg, new { @class = "form-control" })
+            </div>
+            <div class="form-group pt-0">
+                <label asp-for="Description">Açıklama</label>
+                <textarea type="text" class="form-control" required style="height: 300px;" asp-for="Description">
+                    @Html.Raw(Model.Description.Replace("\n", "<br />"))
+                </textarea>
+            </div>
+            <button class="btn btn-outline-primary btn-rounded mb-3 mt-2 px-5">Kaydet</button>
+        </form>
+    </div>
+</div>

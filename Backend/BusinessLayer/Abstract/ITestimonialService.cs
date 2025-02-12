@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using SignalR.EntityLayer.Concrete;
+
+namespace SignalR.BusinessLayer.Abstract
+{
+    public interface ITestimonialService:IGenericService<Testimonial>
+    {
+        void TSetTestimonialActive(int id);
+        void TSetTestimonialPassive(int id);
+        Task<int> TTestimonialCountAsync();
+
+    }
+}

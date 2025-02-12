@@ -1,0 +1,103 @@
+﻿@model CreateBookingDto
+<section class="book_section layout_padding">
+	<div class="container">
+		<div class="heading_container">
+			<h2>
+				Rezervasyon Yapın
+			</h2>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form_container">
+					<form id="bookingForm" asp-action="BookATable" asp-controller="Home" method="post">
+						<div>
+							<input type="text" class="form-control" placeholder="Adınız" asp-for="Name" required/>
+						</div>
+						<div>
+							<input type="tel" class="form-control" placeholder="Telefon Numarası" asp-for="Phone" required />
+						</div>
+						<div>
+							<input type="email" class="form-control" placeholder="Email Adresi" required asp-for="Email"/>
+						</div>
+						<div>
+							<select class="form-control nice-select wide" asp-for="NumberOfPeople" required>
+								<option value="" disabled selected>
+									Kaç Kişi?
+								</option>
+								<option value="1">
+									1
+								</option>
+								<option value="2">
+									2
+								</option>
+								<option value="3">
+									3
+								</option>
+								<option value="4">
+									4
+								</option>
+								<option value="5">
+									5
+								</option>
+							</select>
+						</div>
+						<div>
+							<input type="datetime-local" class="form-control" asp-for="Date">
+						</div>
+						<div class="btn_box">
+							<button type="submit"> 
+								Rezervasyon Yap
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="map_container ">
+					<div id="googleMap"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	document.getElementById("bookingForm").addEventListener("submit", function(event) {
+		event.preventDefault(); 
+
+		var formData = new FormData(this); 
+
+		fetch(this.action, {
+			method: "POST",
+			body: formData,
+			headers: {
+				"Accept": "application/json"
+			}
+		})
+		.then(response => {
+			if (response.ok) {
+				
+				Swal.fire({
+					icon: 'success',
+					title: 'Rezervasyonunuz alındı!',
+					confirmButtonText: 'Tamam'
+				});
+			} else {
+				Swal.fire({
+					icon: 'error',
+					title: 'Hata!',
+					text: 'Rezervasyonunuz alınırken bir hata oluştu. Lütfen tekrar deneyin.',
+					confirmButtonText: 'Tamam'
+				});
+			}
+		})
+		.catch(error => {
+			Swal.fire({
+				icon: 'error',
+				title: 'Hata!',
+				text: 'Sunucuyla iletişimde bir sorun oluştu. Lütfen tekrar deneyin.',
+				confirmButtonText: 'Tamam'
+			});
+		});
+	});
+</script>

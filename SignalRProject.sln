@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{580E6350-3338-42BD-8A12-F32820E42E76}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{721E7A7B-50A9-4FCC-A4C0-D4CA3278C941}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR.UI", "Presentation\SignalRUI\SignalR.UI.csproj", "{D97B2D74-2019-465A-B808-BD360D93E611}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR.Api", "Backend\SignalRApi\SignalR.Api.csproj", "{D3C18B3D-EB0F-4615-B33A-F9478551877A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR.DataAccessLayer", "Backend\DataAccessLayer\SignalR.DataAccessLayer.csproj", "{FD40F078-94B4-43B9-B6A9-2A05B1382DB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR.EntityLayer", "Backend\EntityLayer\SignalR.EntityLayer.csproj", "{E3C69428-6FCE-4C12-833F-41D9C966328E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR.BusinessLayer", "Backend\BusinessLayer\SignalR.BusinessLayer.csproj", "{1D59661F-DBCD-4705-A888-F2B2CBF9DA34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR.DtoLayer", "Backend\DtoLayer\SignalR.DtoLayer.csproj", "{4DDF2BA0-27ED-4818-8816-F1D499DA617C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D97B2D74-2019-465A-B808-BD360D93E611}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D97B2D74-2019-465A-B808-BD360D93E611}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D97B2D74-2019-465A-B808-BD360D93E611}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D97B2D74-2019-465A-B808-BD360D93E611}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3C18B3D-EB0F-4615-B33A-F9478551877A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3C18B3D-EB0F-4615-B33A-F9478551877A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3C18B3D-EB0F-4615-B33A-F9478551877A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3C18B3D-EB0F-4615-B33A-F9478551877A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD40F078-94B4-43B9-B6A9-2A05B1382DB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD40F078-94B4-43B9-B6A9-2A05B1382DB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD40F078-94B4-43B9-B6A9-2A05B1382DB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD40F078-94B4-43B9-B6A9-2A05B1382DB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3C69428-6FCE-4C12-833F-41D9C966328E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3C69428-6FCE-4C12-833F-41D9C966328E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3C69428-6FCE-4C12-833F-41D9C966328E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3C69428-6FCE-4C12-833F-41D9C966328E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D59661F-DBCD-4705-A888-F2B2CBF9DA34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D59661F-DBCD-4705-A888-F2B2CBF9DA34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D59661F-DBCD-4705-A888-F2B2CBF9DA34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D59661F-DBCD-4705-A888-F2B2CBF9DA34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DDF2BA0-27ED-4818-8816-F1D499DA617C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DDF2BA0-27ED-4818-8816-F1D499DA617C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DDF2BA0-27ED-4818-8816-F1D499DA617C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DDF2BA0-27ED-4818-8816-F1D499DA617C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D97B2D74-2019-465A-B808-BD360D93E611} = {721E7A7B-50A9-4FCC-A4C0-D4CA3278C941}
+		{D3C18B3D-EB0F-4615-B33A-F9478551877A} = {580E6350-3338-42BD-8A12-F32820E42E76}
+		{FD40F078-94B4-43B9-B6A9-2A05B1382DB7} = {580E6350-3338-42BD-8A12-F32820E42E76}
+		{E3C69428-6FCE-4C12-833F-41D9C966328E} = {580E6350-3338-42BD-8A12-F32820E42E76}
+		{1D59661F-DBCD-4705-A888-F2B2CBF9DA34} = {580E6350-3338-42BD-8A12-F32820E42E76}
+		{4DDF2BA0-27ED-4818-8816-F1D499DA617C} = {580E6350-3338-42BD-8A12-F32820E42E76}
+	EndGlobalSection
+EndGlobal

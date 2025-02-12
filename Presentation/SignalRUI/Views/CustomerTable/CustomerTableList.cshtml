@@ -1,0 +1,86 @@
+﻿@model IEnumerable<ResultDiningTableDto>
+
+@{
+	ViewData["Title"] = "CustomerTableList";
+	Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+
+<style>
+	.bg-template {
+		background: rgb(0,0,0);
+		background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 41%, rgba(38,38,38,1) 58%, rgba(82,74,74,1) 100%, rgba(0,212,255,1) 100%);
+	}
+
+	.btn-template {
+		background: linear-gradient(90deg, rgba(255,190,51,1) 0%, rgba(231,147,10,1) 100%);
+		background-size: 200% 100%;
+		background-position: 100% 0;
+		transition: background-position 0.7s ease;
+	}
+
+		.btn-template:hover {
+			background-position: 0 0;
+		}
+</style>
+
+
+@await Component.InvokeAsync("_UINavbarViewPartial")
+
+<nav class="breadcrumb m-0 bg-template" style="border-radius: 0;">
+	<div class="container">
+		<a class="breadcrumb-item text-white" href="/Home/Index/">Anasayfa</a>
+		<a class="breadcrumb-item text-white" href="/Home/Index/">Masa Listesi</a>
+		<span class="breadcrumb-item active" style="color: #ffbe33;">Masa Seçimi</span>
+	</div>
+</nav>
+
+<div class="container">
+	<div class="card mt-5 mb-5">
+		<div class="card-header bg-template">
+			<h1 class="card-title text-center text-white">Masa Seçimi</h1>
+		</div>
+		<div class="row p-4">
+			@foreach (var item in Model){
+
+				string statusColor;
+				string statusContent;
+				string hrefLink = "";
+				if (item.Status == true){
+					statusColor = "danger";
+					statusContent = "Dolu";
+				}
+				else {
+					statusColor = "success";
+					statusContent = "Boş";
+					hrefLink = $"href=/Menu/Index/{item.Id}";
+				}
+
+				<div class="col-md-3 mt-2 pl-2 pr-2">
+					<div class="card card-stats bg-@statusColor text-white">
+						<a @hrefLink class="text-decoration-none text-white">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-5">
+										<div class="text-center bg-white rounded-circle">
+											<i class="las la-chair la-3x text-@statusColor"></i>
+										</div>
+									</div>
+									<div class="col-7 d-flex align-items-center">
+										<div class="numbers">
+											<p class="card-category">@item.DiningTableName</p>
+											<h4 class="card-title text-center">@statusContent</h4>
+										</div>
+									</div>
+								</div>
+							</div>
+						</a>
+						<a href="/Basket/Index/@item.Id" class="btn btn-block btn-outline-light ">Sepete Git</a>
+					</div>
+				</div>
+
+			}
+		</div>
+
+	</div>
+
+</div>

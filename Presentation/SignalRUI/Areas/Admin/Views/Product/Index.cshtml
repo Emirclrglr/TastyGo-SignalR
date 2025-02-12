@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ResultProductDto>
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+	int count = 0;
+}
+
+<div class="card mb-5">
+	<div class="card-header">
+		<div class="card-title">Ürün Listesi</div>
+	</div>
+	<div class="card-body">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th class="text-center" style="width:50px" scope="col">&#9679;</th>
+					<th class="text-center" scope="col">Ürün Görseli</th>
+					<th class="text-center" scope="col">Ürün Adı</th>
+					<th class="text-center" scope="col">Kategori</th>
+					<th class="text-center" scope="col">Fiyat</th>
+					<th class="text-center" scope="col">Durum</th>
+					<th class="text-center" scope="col">Düzenle</th>
+					<th class="text-center" scope="col">Sil</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					count++;
+					string statusClass = "";
+					string statusBody = "";
+					string statusHref = "";
+					if (item.Status == true)
+					{
+						statusClass = "badge badge-success";
+						statusBody = "Aktif";
+						statusHref = $"/Admin/Product/SetProductStatusPassive/{item.Id}";
+					}
+					else
+					{
+						statusClass = "badge badge-danger";
+						statusBody = "Pasif";
+						statusHref = $"/Admin/Product/SetProductStatusActive/{item.Id}";
+					}
+
+					<tr>
+						<th class="text-center">@count</th>
+						<td class="text-center"><img src="@item.ImageUrl" class="rounded" width="100" height="80"/></td>
+						<td class="text-center">@item.ProductName</td>
+						<td class="text-center">@item.CategoryName</td>
+						<td class="text-center">@item.ProductPrice.ToString("N0") ₺</td>
+						<td class="text-center"><a href="@statusHref" class="@statusClass">@statusBody</a></td>
+						<td class="text-center"><a href="/Admin/Product/UpdateProduct/@item.Id" class="btn btn-outline-primary btn-rounded">Düzenle</a></td>
+						<td class="text-center"><a href="/Admin/Product/DeleteProduct/@item.Id" class="btn btn-outline-danger btn-rounded">Sil</a></td>
+					</tr>
+				}
+			</tbody>
+		</table>
+		<a href="/Admin/Product/CreateProduct/" class="btn btn-outline-info btn-rounded mb-3">Yeni Ürün Oluştur</a>
+	</div>
+</div>
+
+

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ResultNotificationDto>
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+	int count = 0;
+}
+
+<div class="card">
+	<div class="card-header">
+		<div class="card-title">Bildirimler</div>
+	</div>	
+	<div class="card-body">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th class="text-center" style="width:50px" scope="col">&#9679;</th>
+					<th class="text-center" scope="col">Açıklama</th>
+					<th class="text-center" scope="col">Tarih</th>
+					<th class="text-center" scope="col">Durum</th>
+					<th class="text-center" scope="col">Düzenle</th>
+					<th class="text-center" scope="col">Sil</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					string status;
+					string statusClass;
+					string statusHref;
+					if (item.Status == true){
+						status = "Okundu";
+						statusClass = "success";
+						statusHref = $"/Admin/Notification/SetStatusUnread/{item.Id}";
+					}
+					else {
+						status = "Okunmadı";
+						statusClass = "danger";
+						statusHref = $"/Admin/Notification/SetStatusRead/{item.Id}";
+
+					}
+					count++;
+					<tr>
+						<td class="text-center">@count</td>
+						<td class="text-center">@item.Description</td>
+						<td class="text-center">@item.Date.ToString("dd MMMM, yyyy HH:mm")</td>
+						<td class="text-center"><a href="@statusHref" class="badge badge-@statusClass">@status</a></td>
+						<td class="text-center"><a href="/Admin/Notification/UpdateNotification/@item.Id" class="btn btn-outline-primary btn-rounded">Düzenle</a></td>
+						<td class="text-center"><a href="/Admin/Notification/DeleteNotification/@item.Id" class="btn btn-outline-danger btn-rounded">Sil</a></td>
+					</tr>
+				}
+			</tbody>
+		</table>
+		<a href="/Admin/Notification/CreateNotification/" class="btn btn-outline-info btn-rounded mb-3">Yeni Bildirim Oluştur</a>
+	</div>
+</div>
+

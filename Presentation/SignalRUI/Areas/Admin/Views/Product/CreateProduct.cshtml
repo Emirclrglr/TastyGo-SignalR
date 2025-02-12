@@ -1,0 +1,45 @@
+﻿@model CreateProductDto
+@{
+    ViewData["Title"] = "CreateProduct";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">Yeni Ürün Oluştur</div>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <div class="form-group pt-0">
+                <label asp-for="ProductName">Ürün Adı</label>
+                <input type="text" class="form-control" asp-for="ProductName" required />
+            </div>
+            <div class="form-group pt-0">
+                <label asp-for="ProductPrice">Ürün Fiyatı</label>
+                <input type="number" class="form-control" asp-for="ProductPrice" required placeholder="₺"/>
+            </div>
+            <div class="form-group pt-0">
+                <label asp-for="ImageUrl">Ürün Görseli</label>
+                <input type="text" class="form-control" asp-for="ImageUrl" required />
+            </div>
+            <div class="form-group pt-0">
+                <label asp-for="CategoryId">Kategori</label>
+                @Html.DropDownListFor(x => x.CategoryId, (List<SelectListItem>)ViewBag.CategoryItems, new {@class = "form-control"})
+            </div>
+            <div class="form-group pt-0">
+                <label asp-for="Status">Durum</label>
+                <select class="form-control" asp-for="Status">
+                    <option value="true">Aktif</option>
+                    <option value="false">Pasif</option>
+                </select>
+            </div>
+            <div class="form-group pt-0">
+                <label asp-for="CategoryId">Açıklama</label>
+                <textarea type="text" class="form-control" asp-for="Description" style="height: 100px" required></textarea>
+            </div>
+            <button class="btn btn-outline-primary btn-rounded mb-3 mt-2 px-5">Kaydet</button>
+        </form>
+    </div>
+</div>
+
+

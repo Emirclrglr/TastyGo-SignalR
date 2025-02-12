@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ResultFeatureDto>
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+	int count = 0;
+}
+
+<div class="card">
+	<div class="card-header">
+		<div class="card-title">Öne Çıkanlar</div>
+	</div>
+	<div class="card-body">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th class="text-center" style="width:50px" scope="col">&#9679;</th>
+					<th class="text-center" scope="col">Başlık</th>
+					<th class="text-center" scope="col">Açıklama</th>
+					<th class="text-center" scope="col">Düzenle</th>
+					<th class="text-center" scope="col">Sil</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					count++;
+					string descFormat = "";
+					if (item.Description.Length >= 150)
+					{
+						descFormat = $"{item.Description.Substring(0, 150)}...";
+					}
+					else {
+						descFormat = item.Description;
+					}
+					<tr>
+						<th class="text-center">@count</th>
+						<td class="text-center">@item.Title</td>
+						<td class="text-center">@descFormat</td>
+						<td class="text-center"><a href="/Admin/Feature/UpdateFeature/@item.Id" class="btn btn-outline-primary btn-rounded">Düzenle</a></td>
+						<td class="text-center"><a href="/Admin/Feature/DeleteFeature/@item.Id" class="btn btn-outline-danger btn-rounded">Sil</a></td>
+					</tr>
+				}
+			</tbody>
+		</table>
+		<a href="/Admin/Feature/CreateFeature/" class="btn btn-outline-info btn-rounded mb-3">Yeni Öne Çıkan Oluştur</a>
+	</div>
+</div>
+
+

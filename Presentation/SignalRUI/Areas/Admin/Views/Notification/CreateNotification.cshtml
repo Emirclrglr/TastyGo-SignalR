@@ -1,0 +1,38 @@
+﻿@model CreateNotificationDto
+@{
+    ViewData["Title"] = "CreateNotification";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">Yeni Bildirim Oluştur</div>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <div class="form-group pt-0">
+                <label asp-for="Description">Açıklama</label>
+                <input type="text" class="form-control" asp-for="Description" required />
+            </div>
+            <div class="form-group pt-0">
+                <label asp-for="Type">Bildirim Türü</label>
+                <select class="form-control" asp-for="Type">
+                    <option value="notif-icon notif-primary">Yeni Rezervasyon</option>
+                    <option value="notif-icon notif-success">Yeni Yorum</option>
+                    <option value="notif-icon notif-danger">Yeni Sipariş</option>
+                </select>
+            </div>
+            <div class="form-group pt-0">
+                <label asp-for="Icon">İkon</label>
+                <select class="form-control" asp-for="Icon">
+                    <option value="la la-user-plus">Rezervasyon İkonu</option>
+                    <option value="la la-comment">Yorum İkonu</option>
+                    <option value="la la-heart">Sipariş İkonu</option>
+                </select>
+            </div>
+            <button class="btn btn-outline-primary btn-rounded mb-3 mt-2 px-5">Kaydet</button>
+        </form>
+    </div>
+</div>
+
+

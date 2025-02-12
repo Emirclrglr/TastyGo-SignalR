@@ -1,0 +1,49 @@
+﻿@model LoginDto
+@{
+	Layout = null;
+}
+<style>
+	.custom-background {
+		background: rgb(13,13,12);
+		background: linear-gradient(90deg, rgba(13,13,12,1) 27%, rgba(60,59,59,1) 59%) !important;
+		height: 100vh;
+	}
+</style>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>TastyGo Admin Girişi</title>
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="shortcut icon" href="~/feane-1.0.0/images/favicon.png" type="">
+
+	<!-- Font-->
+	<link rel="stylesheet" type="text/css" href="~/colorlib-regform-32/css/nunito-font.css">
+	<!-- Main Style Css -->
+	<link rel="stylesheet" href="~/colorlib-regform-32/css/style.css" />
+</head>
+<body class="form-v6">
+	<div class="page-content custom-background">
+		<div class="form-v6-content">
+			<div class="form-left">
+				<img src="~/colorlib-regform-32/images/Pizza1.jpg" height="480" width="484" alt="form">
+			</div>
+			<form class="form-detail" method="post">
+				<h2>Admin Paneli Giriş</h2>
+				<div class="form-row">
+					<input type="text" class="input-text" placeholder="Kullanıcı Adı" asp-for="Username" required>
+				</div>
+				<div class="form-row">
+					<input type="password" class="input-text" placeholder="Şifre" asp-for="Password" required>
+				</div>
+
+				<div class="form-row-last">
+					<input type="submit" name="register" class="register" value="Giriş Yap">
+				</div>
+			</form>
+		</div>
+	</div>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

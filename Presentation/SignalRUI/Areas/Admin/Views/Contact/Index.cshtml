@@ -1,0 +1,47 @@
+﻿@model IEnumerable<ResultContactDto>
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+	int count = 0;
+}
+
+<div class="card">
+	<div class="card-header">
+		<div class="card-title">İletişim</div>
+	</div>
+	<div class="card-body">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th class="text-center" style="width:50px" scope="col">&#9679;</th>
+					<th class="text-center" scope="col">Telefon</th>
+					<th class="text-center" scope="col">E-Posta</th>
+					<th class="text-center" scope="col">Alt Açıklama</th>
+					<th class="text-center" scope="col">Düzenle</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					count++;
+					string descFormat = "";
+					if (item.FooterDescription.Length >= 150)
+					{
+						descFormat = $"{item.FooterDescription.Substring(0, 150)}...";
+					}
+					else
+					{
+						descFormat = item.FooterDescription;
+					}
+					<tr>
+						<td class="text-center">@count</td>
+						<td class="text-center">@item.Phone</td>
+						<td class="text-center">@item.Email</td>
+						<td class="text-center">@descFormat</td>
+						<td class="text-center"><a href="/Admin/Contact/UpdateContact/@item.Id" class="btn btn-outline-primary btn-rounded">Düzenle</a></td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>

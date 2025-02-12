@@ -1,0 +1,40 @@
+﻿@model UpdateTestimonialDto
+@{
+    ViewData["Title"] = "UpdateTestimonial";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">Yeni Referans Oluştur</div>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group pt-0">
+                <label asp-for="TestimonialName">Referans Adı</label>
+                <input type="text" class="form-control" asp-for="TestimonialName" required />
+            </div>
+            <div class="form-group pt-0">
+                <label asp-for="TestimonialTitle">Referans Unvanı</label>
+                <input type="text" class="form-control" asp-for="TestimonialTitle" required />
+            </div>
+            <div class="form-group pt-0">
+                <label asp-for="ImageUrl">Referans Görseli</label>
+                <input type="text" class="form-control" asp-for="ImageUrl" required />
+            </div>
+            <div class="form-group pt-0">
+                <label asp-for="TestimonialName">Durum</label>
+                <select class="form-control" asp-for="Status" required>
+                    <option value="true">Aktif</option>
+                    <option value="false">Pasif</option>
+                </select>
+            </div>
+            <div class="form-group pt-0">
+                <label asp-for="Comment">Referans Yorumu</label>
+                <textarea type="text" class="form-control" asp-for="Comment" style="height: 300px;" required></textarea>
+            </div>
+            <button class="btn btn-outline-primary btn-rounded mb-3 mt-2 px-5">Kaydet</button>
+        </form>
+    </div>
+</div>

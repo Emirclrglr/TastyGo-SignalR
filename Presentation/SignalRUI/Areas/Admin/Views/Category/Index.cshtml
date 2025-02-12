@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ResultCategoryDto>
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+	int count = 0;
+}
+
+<div class="card mb-5">
+	<div class="card-header">
+		<div class="card-title">Kategori Listesi</div>
+	</div>
+	<div class="card-body">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th class="text-center" style="width:50px" scope="col">&#9679;</th>
+					<th class="text-center" scope="col">Kategori Adı</th>
+					<th class="text-center" scope="col">Kategori Durumu</th>
+					<th class="text-center" scope="col">Düzenle</th>
+					<th class="text-center" scope="col">Sil</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					count++;
+					string statusClass = "";
+					string statusBody = "";
+					string statusHref = "";
+					if (item.Status == true){
+						statusClass = "badge badge-success";
+						statusBody = "Aktif";
+						statusHref = $"/Admin/Category/SetCategoryStatusPassive/{item.Id}";
+					}
+					else {
+						statusClass = "badge badge-danger";
+						statusBody = "Pasif";
+						statusHref = $"/Admin/Category/SetCategoryStatusActive/{item.Id}";
+					}
+
+					<tr>
+						<th class="text-center">@count</th>
+						<td class="text-center">@item.CategoryName</td>
+						<td class="text-center"><a href="@statusHref" class="@statusClass">@statusBody</a></td>
+						<td class="text-center"><a href="/Admin/Category/UpdateCategory/@item.Id" class="btn btn-outline-primary btn-rounded">Düzenle</a></td>
+						<td class="text-center"><a href="/Admin/Category/DeleteCategory/@item.Id" class="btn btn-outline-danger btn-rounded">Sil</a></td>
+					</tr>
+				}
+			</tbody>
+		</table>
+		<a href="/Admin/Category/CreateCategory/" class="btn btn-outline-info btn-rounded mb-3">Yeni Kategori Oluştur</a>
+	</div>
+</div>
+

@@ -1,0 +1,51 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using SignalR.BusinessLayer.Abstract;
+using SignalR.DataAccessLayer.Abstract;
+using SignalR.EntityLayer.Concrete;
+
+namespace SignalR.BusinessLayer.Concrete
+{
+    public class DiscountManager : IDiscountService
+    {
+        private readonly IDiscountDal _discountDal;
+
+        public DiscountManager(IDiscountDal discountDal)
+        {
+            _discountDal = discountDal;
+        }
+
+        public void TAdd(Discount entity)
+        {
+            _discountDal.Add(entity);
+        }
+
+        public async Task<int> TAvgDiscountRate()
+        {
+            return await _discountDal.AvgDiscountRate();
+        }
+
+        public void TDelete(Discount entity)
+        {
+            _discountDal.Delete(entity);
+        }
+
+        public async Task<Discount> TGetByIdAsync(int id)
+        {
+            return await _discountDal.GetByIdAsync(id);
+        }
+
+        public async Task<IEnumerable<Discount>> TGetListAsync()
+        {
+            return await _discountDal.GetListAsync();
+        }
+
+        public void TUpdate(Discount entity)
+        {
+            _discountDal.Update(entity);
+        }
+    }
+}

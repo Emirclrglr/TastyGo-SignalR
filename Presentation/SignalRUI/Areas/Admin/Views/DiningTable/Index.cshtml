@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ResultDiningTableDto>
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+	int count = 0;
+}
+
+<div class="card mb-5">
+	<div class="card-header">
+		<div class="card-title">Masa Listesi</div>
+	</div>
+	<div class="card-body">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th class="text-center" style="width:50px" scope="col">&#9679;</th>
+					<th class="text-center" scope="col">Masa Adı</th>
+					<th class="text-center" scope="col">Masa Durumu</th>
+					<th class="text-center" scope="col">Düzenle</th>
+					<th class="text-center" scope="col">Sil</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					count++;
+					string statusClass = "";
+					string statusBody = "";
+					if (item.Status == false)
+					{
+						statusClass = "badge badge-danger";
+						statusBody = "Boşta";
+					}
+					else
+					{
+						statusClass = "badge badge-success";
+						statusBody = "Dolu";
+					}
+
+					<tr>
+						<th class="text-center">@count</th>
+						<td class="text-center">@item.DiningTableName</td>
+						<td class="text-center"><span class="@statusClass">@statusBody</span></td>
+						<td class="text-center"><a href="/Admin/DiningTable/UpdateDiningTable/@item.Id" class="btn btn-outline-primary btn-rounded">Düzenle</a></td>
+						<td class="text-center"><a href="/Admin/DiningTable/DeleteDiningTable/@item.Id" class="btn btn-outline-danger btn-rounded">Sil</a></td>
+					</tr>
+				}
+			</tbody>
+		</table>
+		<a href="/Admin/DiningTable/CreateDiningTable/" class="btn btn-outline-info btn-rounded mb-3">Yeni Masa Oluştur</a>
+	</div>
+</div>
+

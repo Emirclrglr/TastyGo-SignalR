@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+
+<div class="hero_area">
+    <div class="bg-box">
+        <img src="~/feane-1.0.0/images/hero-bg.jpg" alt="">
+    </div>
+    <!-- header section strats -->
+    @await Component.InvokeAsync("_UINavbarViewPartial")
+
+    <!-- end header section -->
+    @await Component.InvokeAsync("_HomeSliderViewPartial")
+
+</div>
+<!-- offer section -->
+
+@await Component.InvokeAsync("_HomeDiscountViewPartial")
+
+
+<!-- end offer section -->
+<!-- food section -->
+
+@await Component.InvokeAsync("_HomeOurMenuViewPartial")
+
+<!-- end food section -->
+<!-- about section -->
+
+@await Component.InvokeAsync("_HomeAboutViewPartial")
+
+<!-- end about section -->
+<!-- book section -->
+@await Html.PartialAsync("BookATable")
+
+<!-- end book section -->
+<!-- client section -->
+@await Component.InvokeAsync("_HomeTestimonialViewPartial")
+
+
+<!-- end client section -->

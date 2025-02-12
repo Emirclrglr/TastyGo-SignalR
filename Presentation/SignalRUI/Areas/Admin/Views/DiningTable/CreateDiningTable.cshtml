@@ -1,0 +1,27 @@
+﻿@model CreateDiningTableDto
+@{
+    ViewData["Title"] = "CreateDiningTable";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">Yeni Masa Oluştur</div>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="DiningTableName">Masa Adı Adı</label>
+                <input type="text" class="form-control" asp-for="DiningTableName" required />
+            </div>
+            <div class="form-group pt-0">
+                <label asp-for="Status">Masa Durumu</label>
+                <select class="form-control" asp-for="Status">
+                    <option value="false">Boşta</option>
+                    <option value="true">Dolu</option>
+                </select>
+            </div>
+            <button class="btn btn-outline-primary btn-rounded mb-3 mt-2 px-5">Kaydet</button>
+        </form>
+    </div>
+</div>

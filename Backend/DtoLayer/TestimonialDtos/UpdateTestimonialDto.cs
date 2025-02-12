@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SignalR.DtoLayer.TestimonialDtos
+{
+    public class UpdateTestimonialDto
+    {
+        public int Id { get; set; }
+        public string TestimonialName { get; set; }
+        public string TestimonialTitle { get; set; }
+        public string Comment { get; set; }
+        public string ImageUrl { get; set; }
+        public bool Status { get; set; }
+
+    }
+}

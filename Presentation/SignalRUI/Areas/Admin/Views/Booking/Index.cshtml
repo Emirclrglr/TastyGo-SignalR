@@ -1,0 +1,128 @@
+﻿@model IEnumerable<ResultBookingDto>
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+	int count = 0;
+}
+
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+<script type="text/javascript">
+		$(document).ready(() => {
+		var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:44314/SignalRHub").build();
+
+		connection.start().then(() => {
+
+			setInterval(() => {
+				connection.invoke("SendReservationList");
+			}, 2000);
+
+
+		}).catch((err) => {
+			console.log(err);
+		})
+
+		connection.on("ReceiveBookingList", (values) => {
+			console.log(values);
+			let tablehtml = `
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th class="text-center" style="width:50px" scope="col">&#9679;</th>
+						<th class="text-center" scope="col">Rezervasyon Sahibi</th>
+						<th class="text-center" scope="col">Telefon</th>
+						<th class="text-center" scope="col">E-Posta</th>
+						<th class="text-center" scope="col">Kişi Sayısı</th>
+						<th class="text-center" scope="col">Rezervasyon Durumu</th>
+						<th class="text-center" scope="col">Tarih</th>
+						<th class="text-center" scope="col">Düzenle</th>
+						<th class="text-center" scope="col">Sil</th>
+						<th class="text-center" scope="col">Onayla</th>
+						<th class="text-center" scope="col">İptal Et</th>
+					</tr>
+				</thead>
+				<tbody>`
+				
+			let count = 0;
+			$.each(values, (index, item) => {
+				const formattedPhone = item.phone.replace(/(\d{4})(\d{3})(\d{2})(\d{2})/, "($1) $2 $3 $4");				
+				const formattedDate = new Date(item.date).toLocaleDateString("tr-TR", {
+					day: "2-digit",
+					month: "long",
+					year: "numeric",
+					hour: "2-digit",
+					minute: "2-digit"
+				});
+				count++;
+				tablehtml += `
+						<tr>
+							<td class="text-center">${count}</td>
+							<td class="text-center">${item.name}</td>
+							<td class="text-center">${formattedPhone}</td>
+							<td class="text-center">${item.email}</td>
+							<td class="text-center">${item.numberOfPeople}</td>
+							<td class="text-center">${item.reservationStatus}</td>
+							<td class="text-center">${formattedDate}</td>
+							<td class="text-center"><a href="/Admin/Booking/UpdateBooking/${item.id}" class="btn btn-outline-primary btn-rounded">Düzenle</a></td>
+							<td class="text-center"><a href="/Admin/Booking/DeleteBooking/${item.id}" class="btn btn-outline-danger btn-rounded">Sil</a></td>
+							<td class="text-center"><a href="/Admin/Booking/SetReservationStatusAccepted/${item.id}" class="btn btn-outline-success btn-rounded">Onayla</a></td>
+							<td class="text-center"><a href="/Admin/Booking/SetReservationStatusDenied/${item.id}" class="btn btn-outline-warning btn-rounded">İptal Et</a></td>
+						</tr>`
+			})
+			tablehtml += `</tbody></table>`
+			
+			$("#bookingList").html(tablehtml);
+		});
+
+
+	});
+</script>
+
+
+<div class="card">
+	<div class="card-header">
+		<div class="card-title">Rezervasyonlar</div>
+	</div>
+	<div class="card-body">
+	@* 	<table class="table table-hover">
+			<thead>
+				<tr>
+					<th class="text-center" style="width:50px" scope="col">&#9679;</th>
+					<th class="text-center" scope="col">Rezervasyon Sahibi</th>
+					<th class="text-center" scope="col">Telefon</th>
+					<th class="text-center" scope="col">E-Posta</th>
+					<th class="text-center" scope="col">Kişi Sayısı</th>
+					<th class="text-center" scope="col">Tarih</th>
+					<th class="text-center" scope="col">Düzenle</th>
+					<th class="text-center" scope="col">Sil</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					count++;
+					string formattedNumber = String.Format("{0:(###) ###-####}", Convert.ToInt64(item.Phone));
+
+
+					<tr>
+						<td class="text-center">@count</td>
+						<td class="text-center">@item.Name</td>
+						<td class="text-center">@formattedNumber</td>
+						<td class="text-center">@item.Email</td>
+						<td class="text-center">@item.NumberOfPeople</td>
+						<td class="text-center">@item.Date.ToString("dd MMMM, yyyy HH:mm")</td>
+						<td class="text-center"><a href="/Admin/Booking/UpdateBooking/@item.Id" class="btn btn-outline-primary btn-rounded">Düzenle</a></td>
+						<td class="text-center"><a href="/Admin/Booking/DeleteBooking/@item.Id" class="btn btn-outline-danger btn-rounded">Sil</a></td>
+					</tr>
+				}
+			</tbody>
+		</table>
+		 *@
+
+		<div id="bookingList"></div>
+	</div>
+</div>
+

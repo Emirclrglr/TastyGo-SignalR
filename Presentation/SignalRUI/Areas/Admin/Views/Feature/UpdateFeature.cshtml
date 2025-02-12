@@ -1,0 +1,29 @@
+﻿@model UpdateFeatureDto
+@{
+    ViewData["Title"] = "UpdateFeature";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">Öne Çıkan Düzenle</div>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Title">Başlık</label>
+                <input type="text" class="form-control" asp-for="Title" required />
+            </div>
+            <div class="form-group pt-0">
+                <label asp-for="Description">Açıklama</label>
+                <textarea type="text" class="form-control" style="height: 300px" asp-for="Description" required>
+                    @Html.Raw(Model.Description.Replace("\n", "<br />"))
+                </textarea>
+            </div>
+            <button class="btn btn-outline-primary btn-rounded mb-3 mt-2 px-5">Kaydet</button>
+        </form>
+    </div>
+</div>
+
+
