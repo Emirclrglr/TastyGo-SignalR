@@ -1,4 +1,4 @@
-# 🍽️ Dinamik Restoran Yönetim Sistemi
+# 🍽️ TastyGo : SignalR ile QR Kodlu Restoran Yönetimi
 
 Proje Murat Yücedağ hocamızın Udemy üzerinde yayınlamış olduğu "Asp.Net Core Api SignalR ile QR Kodlu Sipariş Yönetimi" ile birlikte geliştirilmiştir. Sertifika: https://www.udemy.com/certificate/UC-da9fee90-320b-40fd-a3d8-4733430a3e77/
 
